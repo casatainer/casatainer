@@ -91,7 +91,7 @@ function reload() {
     window.location.replace(window.location.origin + window.location.pathname + "?" + params.toString());
   })
   for (let type of ["basic", "normal", "advanced"]) {
-    document.querySelectorAll("#btnrem-" + type).forEach(e => {
+    document.querySelectorAll(".btnrem-" + type).forEach(e => {
       e.addEventListener("click", ev => {
         ev.preventDefault();
         CartManager.addCartItem(type, -1);
