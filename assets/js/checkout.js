@@ -59,6 +59,8 @@ function reload(){
     <strong>${total.toLocaleString("es-es")} €</strong>
   </li>`
 
+  document.querySelector("#count-cart").innerHTML=cart["basic"]+cart["normal"]+cart["advanced"]
+
   document.querySelector("#scart").innerHTML=html_cart;
 }
 
