@@ -17,8 +17,8 @@ function reload() {
       let name = names[type]
       html_cart += `<li class="list-group-item d-flex justify-content-between lh-sm">
       <div>
-        <h6 class="my-0">Casatainer · ${name} <small>x${cart[type]}</small></h6>
-        <small class="text-body-secondary" class="btnrem-${type}">${prices[type].toLocaleString("es-es")} €</small>
+        <h6 class="my-0 btnrem-${type}">Casatainer · ${name} <small>x${cart[type]}</small></h6>
+        <small class="text-body-secondary btnrem-${type}">${prices[type].toLocaleString("es-es")} €</small>
       </div>
       <span class="text-body-secondary">${(prices[type] * cart[type]).toLocaleString("es-es")} €</span>
     </li>`
@@ -90,19 +90,15 @@ function reload() {
     params.set("promocode", document.querySelector("#redeem-code").value);
     window.location.replace(window.location.origin + window.location.pathname + "?" + params.toString());
   })
-  document.querySelector("#btnrem-basic").addEventListener("click", e => {
-    e.preventDefault();
-    CartManager.addCartItem("basic", -1);
-    reload();
-  })
-  document.querySelector("#btnrem-normal").addEventListener("click", e => {
-    e.preventDefault();
-    CartManager.addCartItem("normal", -1);
-    reload();
-  })
-  document.querySelector("#btnrem-advanced").addEventListener("click", e => {
-    e.preventDefault();
-    CartManager.addCartItem("advanced", -1);
-    reload();
-  })
+  for (let type of ["basic", "normal", "advanced"]) {
+    document.querySelectorAll("#btnrem-" + type).forEach(e => {
+      e.addEventListener("click", ev => {
+        ev.preventDefault();
+        CartManager.addCartItem(type, -1);
+        reload();
+      })
+    })
+  }
+
+
 })()
